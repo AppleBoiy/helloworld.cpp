@@ -5,17 +5,17 @@ project(HELLOWORLD)
 # Set the C++ standard to use
 set(CMAKE_CXX_STANDARD 11)
 
-# set the output directory
+# Set the output directory
 set(CMAKE_RUNTIME_OUTPUT_DIRECTORY ${CMAKE_BINARY_DIR}/bin)
 
-# set the source directory
-set(SOURCE_DIR ${CMAKE_SOURCE_DIR}/src)
-
 # Add the executable
-add_executable(helloworld ${SOURCE_DIR}/main.cpp)
+add_executable(helloworld src/hello.cpp)
 
-# Add custom command to clean up the build directory
+# Add custom command to clean up cache and build directories
 add_custom_target(clean-all
     COMMAND ${CMAKE_COMMAND} -E remove_directory ${CMAKE_BINARY_DIR}/bin
-    COMMENT "Clean up build directory"
+    COMMAND ${CMAKE_COMMAND} -E remove_directory ${CMAKE_BINARY_DIR}/CMakeFiles
+    COMMAND ${CMAKE_COMMAND} -E remove ${CMAKE_BINARY_DIR}/CMakeCache.txt
+    COMMAND ${CMAKE_COMMAND} -E remove ${CMAKE_BINARY_DIR}/cmake_install.cmake
+    COMMENT "Clean up cache and build directories"
 )
